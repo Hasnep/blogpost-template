@@ -1,0 +1,26 @@
+name: Build Blogpost
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1.0.0
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: 1.7
+      - name: Install dependencies
+        run: julia --project -e 'using Pkg; Pkg.instantiate()'
+      - name: Build project
+        run: julia --project build.jl
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "*.tar"

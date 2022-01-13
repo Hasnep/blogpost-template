@@ -1,0 +1,5 @@
+name = "blogpost-template"
+
+[deps]
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+Tar = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"

@@ -1,0 +1,6 @@
+title = "Title"
+description = "Description"
+first_posted = [2022, 1, 1]
+language = "Julia"
+emoji = "❓"
+slug="blogpost-template"
