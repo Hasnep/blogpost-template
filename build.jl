@@ -11,16 +11,16 @@ function build(; run_pandoc = false, create_tarball = false)
     # Read metadata
     matadata_file_path = joinpath(pwd(), "metadata.toml")
     metadata = TOML.parsefile(matadata_file_path)
-    slug = metadata["slug"]
+    id = metadata["id"]
 
     # Build markdown document
-    input_jl_file_path = joinpath(pwd(), "src", slug * ".jl")
+    input_jl_file_path = joinpath(pwd(), "src", id * ".jl")
     Literate.markdown(
         input_jl_file_path,
         build_folder;
         documenter = false,
         execute = true,
-        preprocess = s -> replace(s, "# hide\n" => "#hide\n"),    # Fix auto-formatted hide comments
+        preprocess = s -> replace(s, "# hide\n" => "#hide\n")    # Fix auto-formatted hide comments
     )
 
     # Copy metadata file to build build folder
@@ -28,8 +28,8 @@ function build(; run_pandoc = false, create_tarball = false)
 
     # Build to html using pandoc
     if run_pandoc
-        built_md_file_path = joinpath(build_folder, slug * ".md")
-        built_html_file_path = joinpath(build_folder, slug * ".html")
+        built_md_file_path = joinpath(build_folder, id * ".md")
+        built_html_file_path = joinpath(build_folder, id * ".html")
         @info "Building markdown to HTML file at `$built_html_file_path`."
         run(
             Cmd([
@@ -44,7 +44,7 @@ function build(; run_pandoc = false, create_tarball = false)
     end
 
     if create_tarball
-        tarball_file_path = joinpath(pwd(), slug * ".tar")
+        tarball_file_path = joinpath(pwd(), id * ".tar")
         @info "Creating tarball file at `$tarball_file_path`."
         Tar.create(build_folder, tarball_file_path)
     end
