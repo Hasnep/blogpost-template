@@ -20,10 +20,7 @@ function build(; run_pandoc = false, create_tarball = false)
         build_folder;
         documenter = false,
         execute = true,
-        # Fix auto-formatted hide comments
-        preprocess = s -> replace(s, "# hide\n" => "#hide\n"),
-        # Insert title
-        postprocess = s -> "---\ntitle: $(metadata["title"])\n---\n\n$s"
+        preprocess = s -> replace(s, "# hide\n" => "#hide\n"),    # Fix auto-formatted hide comments
     )
 
     # Copy metadata file to build build folder
