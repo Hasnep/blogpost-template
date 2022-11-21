@@ -1,20 +1,14 @@
 # Blogpost Template
 
-## Building
-
-To set up the blogpost, run:
+To build a blogpost, run:
 
 ```julia
-import Pkg
-Pkg.activate(".")
-Pkg.instantiate()
-include(joinpath(pwd(), "build.jl"))
+import BuildJuliaBlogpost
+BuildJuliaBlogpost.main(run_pandoc=false, create_tarball=true)
 ```
 
-To build the blogpost, run:
+or run
 
-```julia
-build(run_pandoc = false, create_tarball = false)
+```shell
+make build
 ```
-
-The raw output files will be in the `build` folder including an HTML file if pandoc is installed and an optional tarball file will be created in the project's root.
