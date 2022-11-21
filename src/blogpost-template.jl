@@ -1,1 +1,1 @@
-This is a blogpost template.
+# This is a blogpost template.
