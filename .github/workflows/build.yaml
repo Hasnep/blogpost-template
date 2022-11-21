@@ -1,26 +1,27 @@
-name: Build Blogpost
+name: Build and release blogpost
 
 on:
+  pull_request:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout the repo
         uses: actions/checkout@v1.0.0
       - name: Install Julia
         uses: julia-actions/setup-julia@v1
         with:
-          version: 1.7
+          version: "1.8"
       - name: Install dependencies
         run: julia --project -e 'using Pkg; Pkg.instantiate()'
       - name: Build project
-        run: julia --project build.jl
+        uses: hasnep/julia-blogpost-action@main
       - name: Create release
-        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
         with:
           files: "*.tar"
