@@ -2,4 +2,4 @@
 name-template: v$RESOLVED_VERSION
 # The tag of the release
 tag-template: v$RESOLVED_VERSION
-template: 
+template: ""
