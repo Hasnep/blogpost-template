@@ -1,7 +1,7 @@
 id = "blogpost-template"
 title = "Title"
 description = "Description"
-first_posted = [2022, 1, 1]
-last_updated = [2022, 1, 1]
+first_posted = 2022-01-01
+last_updated = 2023-06-30
 language = "Julia"
 emoji = "❓"
